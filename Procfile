@@ -1,0 +1,1 @@
+web: gunicorn dfndealfinder_django.wsgi
