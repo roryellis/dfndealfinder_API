@@ -30,6 +30,7 @@ class SpecialList(generics.ListCreateAPIView):
         limited_time = self.request.query_params.get('limited_time', None)
         start_date = self.request.query_params.get('start_date', None)
         end_date = self.request.query_params.get('end_date', None)
+        cuisine = self.request.query_params.get('cuisine', None)
 
         if category is not None:
             queryset = queryset.filter(category__name__icontains=category)
@@ -55,6 +56,8 @@ class SpecialList(generics.ListCreateAPIView):
             queryset = queryset.filter(start_date__lte=start_date)
         if end_date is not None:
             queryset = queryset.filter(end_date__gte=end_date)
+        if cuisine is not None:
+            queryset = queryset.filter(restaurant__cuisine__name__icontains=cuisine)
         return queryset
 
 
