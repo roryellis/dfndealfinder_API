@@ -76,13 +76,30 @@ class Special(models.Model):
         related_name='specials'
     )
     daily_special = models.BooleanField()
-    monday = models.BooleanField()
-    tuesday = models.BooleanField()
-    wednesday = models.BooleanField()
-    thursday = models.BooleanField()
-    friday = models.BooleanField()
-    saturday = models.BooleanField()
-    sunday = models.BooleanField()
+    DAY_CHOICES = [
+        ('monday', 'monday'),
+        ('tuesday', 'tuesday'),
+        ('wednesday', 'wednesday'),
+        ('thursday', 'thursday'),
+        ('friday', 'friday'),
+        ('saturday', 'saturday'),
+        ('sunday', 'sunday'),
+        ('weekdays', 'weekdays'),
+        ('weekends', 'weekends'),
+    ]
+    special_day = models.CharField(
+        max_length=10,
+        choices=DAY_CHOICES,
+        null=True,
+        blank=True,
+    )
+    # monday = models.BooleanField()
+    # tuesday = models.BooleanField()
+    # wednesday = models.BooleanField()
+    # thursday = models.BooleanField()
+    # friday = models.BooleanField()
+    # saturday = models.BooleanField()
+    # sunday = models.BooleanField()
     limited_time = models.BooleanField()
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)

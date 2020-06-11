@@ -18,7 +18,7 @@ class SpecialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Special
         fields = ('id', 'restaurant', 'title', 'description', 'promo_image', 'category', 'daily_special',
-                  'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'limited_time', 'start_date', 'end_date',)
+                  'special_day', 'limited_time', 'start_date', 'end_date',)
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
