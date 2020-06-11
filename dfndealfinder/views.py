@@ -1,11 +1,25 @@
 from rest_framework import generics
-from .serializers import RestaurantSerializer, SpecialSerializer
-from .models import Restaurant, Special, DiningType, CuisineType
+from .serializers import RestaurantSerializer, SpecialSerializer, CuisineTypeSerializer, DiningTypeSerializer, SpecialCategorySerializer
+from .models import Restaurant, Special, DiningType, CuisineType, SpecialCategory
 
 
 class RestaurantList(generics.ListCreateAPIView):
-    queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = Restaurant.objects.all()
+        city = self.request.query_params.get('city', None)
+        dining_options = self.request.query_params.get('dining_options', None)
+        cuisine = self.request.query_params.get('cuisine', None)
+
+        if city is not None:
+            queryset = queryset.filter(city__icontains=city)
+        if dining_options is not None:
+            queryset = queryset.filter(dining_options__name__icontains=dining_options)
+        if cuisine is not None:
+            queryset = queryset.filter(
+                cuisine__name__icontains=cuisine)
+        return queryset
 
 
 class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -13,7 +27,6 @@ class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RestaurantSerializer
 
 class SpecialList(generics.ListCreateAPIView):
-    # queryset = Special.objects.all()
     serializer_class = SpecialSerializer
 
     def get_queryset(self, *args, **kwargs):
@@ -47,21 +60,16 @@ class SpecialDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Special.objects.all()
     serializer_class = SpecialSerializer
 
-# class DiningTypeList(generics.ListCreateAPIView):
-#     queryset = DiningType.objects.all()
-#     serializer_class = DiningTypeSerializer
+class DiningTypeList(generics.ListCreateAPIView):
+    queryset = DiningType.objects.all()
+    serializer_class = DiningTypeSerializer
 
 
-# class DiningTypeDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = DiningType.objects.all()
-#     serializer_class = DiningTypeSerializer
+class CuisineTypeList(generics.ListCreateAPIView):
+    queryset = CuisineType.objects.all()
+    serializer_class = CuisineTypeSerializer
 
 
-# class CuisineTypeList(generics.ListCreateAPIView):
-#     queryset = CuisineType.objects.all()
-#     serializer_class = CuisineTypeSerializer
-
-
-# class CuisineTypeDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = CuisineType.objects.all()
-#     serializer_class = CuisineTypeSerializer
+class SpecialCategoryList(generics.ListCreateAPIView):
+    queryset = SpecialCategory.objects.all()
+    serializer_class = CuisineTypeSerializer

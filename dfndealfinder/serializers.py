@@ -17,8 +17,7 @@ class SpecialSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Special
-        fields = ('id', 'restaurant', 'title', 'description', 'promo_image', 'category', 'daily_special',
-                  'special_day', 'limited_time', 'start_date', 'end_date',)
+        fields = ('id', 'restaurant', 'title', 'description', 'promo_image', 'category', 'daily_special', 'special_day', 'limited_time', 'start_date', 'end_date',)
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
@@ -31,6 +30,27 @@ class RestaurantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Restaurant
-        fields = ('id', 'name', 'address', 'city', 'state', 'zip', 'dining_options', 'cuisine',
-                  'description', 'restaurant_image', 'website_url', 'specials',)
+        fields = ('id', 'name', 'address', 'city', 'state', 'zip', 'dining_options', 'cuisine', 'description', 'restaurant_image', 'website_url', 'specials',)
         lookup_field = 'name'
+
+class CuisineTypeSerializer(serializers.ModelSerializer):
+    name = serializers.StringRelatedField()
+    class Meta:
+        model = CuisineType
+        fields = ('id','name',)
+
+
+class DiningTypeSerializer(serializers.ModelSerializer):
+    name = serializers.StringRelatedField()
+
+    class Meta:
+        model = DiningType
+        fields = ('id', 'name',)
+
+
+class SpecialCategorySerializer(serializers.ModelSerializer):
+    name = serializers.StringRelatedField()
+
+    class Meta:
+        model = SpecialCategory
+        fields = ('id', 'name',)

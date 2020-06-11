@@ -10,4 +10,7 @@ urlpatterns = [
     path('specials', views.SpecialList.as_view(), name='special_list'),
     path('specials/<int:pk>', views.SpecialDetail.as_view(),
          name='special_detail'),
+    path('cuisinetypes', views.CuisineTypeList.as_view(), name='cuisinetype_list'),
+    path('diningtypes', views.DiningTypeList.as_view(), name='diningtype_list'),
+    path('specialcategories', views.SpecialCategoryList.as_view(), name='specialcategory_list'),
 ]
