@@ -68,7 +68,7 @@ class Special(models.Model):
         on_delete=models.CASCADE,
         related_name='specials'
     )
-    title = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
     description = models.TextField()
     promo_image = models.ImageField(upload_to=upload_image_name, blank=True)
     category = models.ManyToManyField(
@@ -106,4 +106,4 @@ class Special(models.Model):
 
 
     def __str__(self):
-        return self.title
+        return self.name

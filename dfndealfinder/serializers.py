@@ -17,7 +17,7 @@ class SpecialSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Special
-        fields = ('id', 'restaurant', 'title', 'description', 'promo_image', 'category', 'daily_special', 'special_day', 'limited_time', 'start_date', 'end_date',)
+        fields = ('id', 'restaurant', 'name', 'description', 'promo_image', 'category', 'daily_special', 'special_day', 'limited_time', 'start_date', 'end_date',)
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
