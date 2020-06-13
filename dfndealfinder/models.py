@@ -86,6 +86,7 @@ class Special(models.Model):
         ('sunday', 'sunday'),
         ('weekdays', 'weekdays'),
         ('weekends', 'weekends'),
+        ('every day', 'every day'),
     ]
     special_day = models.CharField(
         max_length=10,
